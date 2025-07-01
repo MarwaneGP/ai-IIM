@@ -43,7 +43,7 @@ dummy_input = torch.randn(1, 1, 28, 28).to(device)
 torch.onnx.export(
     model,
     dummy_input,
-    "mnist_cnn.onnx",
+    "num_ai_detector/mnist_cnn.onnx",
     input_names=["input"],
     output_names=["output"],
     dynamic_axes={"input": {0: "batch_size"}, "output": {0: "batch_size"}},

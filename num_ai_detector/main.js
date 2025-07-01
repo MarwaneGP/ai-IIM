@@ -6,6 +6,7 @@ const ctx = canvas.getContext("2d");
 ctx.fillStyle = "black";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+
 ctx.lineWidth = 20;
 ctx.lineCap = "round";
 ctx.strokeStyle = "white";
@@ -36,8 +37,8 @@ function draw(e) {
 }
 
 function clearCanvas() {
-  ctx.fillStyle = "black";  *
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "black";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.beginPath();
   document.getElementById("result").innerText = "Prediction: ...";
 }
