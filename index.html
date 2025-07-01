@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>ONNX JS CIFAR Demo</title>
+  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web/dist/ort.min.js"></script>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <h2>Draw a 32x32 grayscale image:</h2>
+  <canvas id="canvas" width="128" height="128"></canvas>
+  <br />
+  <button onclick="predict()">Predict</button>
+  <p id="result">Prediction: ...</p>
+
+  <script src="./main.js"></script>
+</body>
+
+</html>
