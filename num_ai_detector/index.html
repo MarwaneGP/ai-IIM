@@ -11,9 +11,40 @@
 <body>
   <h2>Draw a 32x32 grayscale image:</h2>
   <canvas id="canvas" width="128" height="128"></canvas>
+  <div style="margin-top: 1rem;">
+    <button onclick="predict()">Predict</button>
+    <button onclick="addToExpression()">Add to Expression</button>
+    <select id="operatorDropdown" onchange="addOperator()">
+      <option value="">Insert Operator</option>
+      <option value="+">+</option>
+      <option value="-">−</option>
+      <option value="*">×</option>
+      <option value="/">÷</option>
+    </select>
+    <button onclick="calculateExpression()">Calculate</button>
+    <button onclick="clearCanvas()">Clear Canvas</button>
+    <button onclick="toggleEraser()" id="eraserBtn">🧽 Eraser: OFF</button>
+  </div>
+
   <br />
-  <button onclick="predict()">Predict</button>
   <p id="result">Prediction: ...</p>
+  <p id="expression">Expression: </p>
+  <p id="finalResult">Result: ...</p>
+
+  <div id="instructions">
+    <h3>How to Use</h3>
+    <ol>
+      <li>Draw a digit (0–9) on the black canvas.</li>
+      <li>Click <strong>Predict</strong> to recognize the digit.</li>
+      <li>Click <strong>Add to Expression</strong> to add it to your math expression.</li>
+      <li>Select an operator like +, −, ×, ÷ from the dropdown to insert it.</li>
+      <li>Repeat for more digits.</li>
+      <li>Click <strong>Calculate</strong> to compute the full result.</li>
+      <li>Click <strong>Eraser</strong> to toggle between drawing and erasing.</li>
+      <li>Click <strong>Clear Canvas</strong> to start a new digit.</li>
+    </ol>
+  </div>
+
 
   <script src="./main.js"></script>
 </body>

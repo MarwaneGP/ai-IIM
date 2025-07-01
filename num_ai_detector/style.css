@@ -1,5 +1,68 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  background-color: #f8f9fa;
+  color: #333;
+  padding: 2rem;
+  margin: 0;
+}
+
+h2 {
+  margin-bottom: 0.5rem;
+}
+
 canvas {
-  border: 1px solid #000;
-  background: white;
+  border: 2px solid #444;
+  background-color: black;
   cursor: crosshair;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+}
+
+button,
+select {
+  padding: 10px 16px;
+  margin: 0.25rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+button:hover,
+select:hover {
+  background-color: #0056b3;
+}
+
+#eraserBtn {
+  background-color: #6c757d;
+}
+
+#eraserBtn[active="true"] {
+  background-color: #dc3545;
+}
+
+#result,
+#expression,
+#finalResult {
+  margin-top: 1rem;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+#instructions {
+  max-width: 600px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+#instructions h3 {
+  margin-top: 0;
 }

@@ -1,4 +1,10 @@
 let session = null;
+let isErasing = false;
+
+
+let lastPrediction = null;
+let expression = "";
+
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
@@ -12,6 +18,28 @@ ctx.lineCap = "round";
 ctx.strokeStyle = "white";
 
 let isDrawing = false;
+
+function toggleEraser() {
+  isErasing = !isErasing;
+  ctx.strokeStyle = isErasing ? "black" : "white";
+
+  const btn = document.getElementById("eraserBtn");
+  btn.innerText = isErasing ? "🧽 Eraser: ON" : "🧽 Eraser: OFF";
+  btn.setAttribute("active", isErasing ? "true" : "false");
+}
+
+
+function addOperator() {
+  const select = document.getElementById("operatorDropdown");
+  const op = select.value;
+
+  if (!op) return;
+
+  expression += op;
+  document.getElementById("expression").innerText = `Expression: ${expression}`;
+  select.selectedIndex = 0;  // Reset dropdown
+}
+
 
 canvas.addEventListener("mousedown", () => {
   isDrawing = true;
@@ -43,8 +71,31 @@ function clearCanvas() {
   document.getElementById("result").innerText = "Prediction: ...";
 }
 
+function addToExpression() {
+  if (lastPrediction === null) {
+    alert("Please predict a digit first!");
+    return;
+  }
 
-// Load ONNX model
+  const digit = lastPrediction.toString();
+  expression += digit;
+  document.getElementById("expression").innerText =
+    `Expression: ${expression}`;
+
+  clearCanvas();
+  lastPrediction = null;
+}
+
+function calculateExpression() {
+  try {
+    const safeExpr = expression.replace(/[^0-9+\-*/().]/g, '');
+    const result = Function('"use strict"; return (' + safeExpr + ')')();
+    document.getElementById("finalResult").innerText = `Result: ${result}`;
+  } catch (e) {
+    document.getElementById("finalResult").innerText = `Invalid expression`;
+  }
+}
+
 async function loadModel() {
   if (!session) {
     session = await ort.InferenceSession.create("./mnist_cnn.onnx");
@@ -76,12 +127,12 @@ async function predict() {
   const inputTensor = preprocess(canvas);
   const feeds = { input: inputTensor };
 
-  console.log(feeds)
   const results = await session.run(feeds);
   const output = results.output.data;
-  console.log(output)
 
   const maxIndex = output.indexOf(Math.max(...output));
+  lastPrediction = maxIndex;
+
   document.getElementById("result").innerText =
     `Prediction: ${maxIndex}`;
 }
